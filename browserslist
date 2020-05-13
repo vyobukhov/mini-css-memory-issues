@@ -1,0 +1,9 @@
+# Browsers list used by autoprefixer or more exactly, browserslist dependency of autoprefixer: https://github.com/ai/browserslist
+
+Last 2 versions
+Android >= 4.0
+ie >= 10
+iOS >= 7.1
+not BlackBerry < 10
+not ExplorerMobile < 11 # windows phone 8.1+ only
+
