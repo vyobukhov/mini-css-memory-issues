@@ -2,20 +2,25 @@ const fs = require('fs-extra');
 const path = require('path');
 const { customAlphabet } = require('nanoid');
 const _ = require('lodash');
-
 const getRandomSass = require('./getRandomSass');
 const getRandomJs = require('./getRandomJs');
 
 const nanoid = customAlphabet('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', 10);
-
 const entriesNumber = parseInt(process.env.ENTRIES, 10) || 1;
 const entryComponentsNumber = parseInt(process.env.COMPONENTS, 10) || 1;
 
+// Paths
 const rootDir = process.cwd();
 const srcDir = path.resolve(rootDir, 'generatedSrc');
 const entriesDir = path.resolve(srcDir, 'entries');
 const cmpDir = path.resolve(srcDir, 'components');
 
+/**
+ * Generate component
+ * @param id
+ * @param entryId
+ * @returns {Promise<void>}
+ */
 async function generateComponent(id, entryId) {
   // Generating basic component files
   const componentDir = path.resolve(cmpDir, id);
@@ -32,6 +37,11 @@ async function generateComponent(id, entryId) {
   console.log(`Generated component ${id} for entry ${entryId}`);
 }
 
+/**
+ * Generate entry
+ * @param id
+ * @returns {Promise<void>}
+ */
 async function generateEntry(id) {
   // Generate directory
   const entryDir = path.resolve(entriesDir, id);
@@ -61,6 +71,10 @@ async function generateEntry(id) {
   console.log(`Generated entry ${id}`);
 }
 
+/**
+ * Generate test data
+ * @returns {Promise<void>}
+ */
 async function generate() {
   // Empty generatedSrc dir
   await fs.emptyDir(srcDir);

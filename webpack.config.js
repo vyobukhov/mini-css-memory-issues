@@ -51,8 +51,8 @@ module.exports = {
       {
         test: /\.(sa|sc|c)ss$/,
         use: [
-          // { loader: MiniCssExtractPlugin.loader, options: { hmr: false } },
-          { loader: 'style-loader' },
+          { loader: MiniCssExtractPlugin.loader, options: { hmr: false } },
+          // { loader: 'style-loader' },
           { loader: 'css-loader', options: { sourceMap: false } },
           { loader: 'postcss-loader', options: { plugins: () => [require('autoprefixer')] } },
           { loader: 'sass-loader', options: { sourceMap: false } }
