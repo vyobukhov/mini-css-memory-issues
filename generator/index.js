@@ -8,6 +8,7 @@ const getRandomJs = require('./getRandomJs');
 const nanoid = customAlphabet('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', 10);
 const entriesNumber = parseInt(process.env.ENTRIES, 10) || 1;
 const entryComponentsNumber = parseInt(process.env.COMPONENTS, 10) || 1;
+const enumsNumber = parseInt(process.env.ENUMS, 10) || 1;
 
 // Paths
 const rootDir = process.cwd();
@@ -71,6 +72,17 @@ async function generateEntry(id) {
   console.log(`Generated entry ${id}`);
 }
 
+async function generateEnums(enumsLen = 100) {
+  let jsContent = `module.exports = {`;
+
+  for (let i = 0; i < enumsLen; i++) {
+    jsContent += `\n "some.nested.property-${i}": 1,`
+  }
+  jsContent += '\n};';
+
+  await fs.writeFile(`${srcDir}/enums.js`, jsContent, 'utf8');
+}
+
 /**
  * Generate test data
  * @returns {Promise<void>}
@@ -87,6 +99,8 @@ async function generate() {
     entryPromises.push(generateEntry(id));
     i++;
   }
+
+  generateEnums(enumsNumber);
 
   await Promise.all(entryPromises);
 }
