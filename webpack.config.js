@@ -1,5 +1,6 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WebpackBar = require('webpackbar');
+const webpack = require('webpack');
 const fs = require('fs-extra');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
@@ -67,6 +68,9 @@ module.exports = {
       // both options are optional
       filename: devMode ? '[name].css' : '[name].[hash].css',
       chunkFilename: devMode ? '[id].css' : '[id].[hash].css'
+    }),
+    new webpack.DefinePlugin({
+      ENUM: require('./generatedSrc/enums.js')
     }),
     new WebpackBar()
   ]
