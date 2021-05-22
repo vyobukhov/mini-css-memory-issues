@@ -3,7 +3,7 @@ const { sample } = require('lodash');
 module.exports = function (moduleName) {
   return `
 @import '../../../src/common/variables';
-$lmtAspectRatio: 352 / 568;
+$lmtAspectRatio: 1.5;
 
 @mixin absolute {
     position: absolute;
